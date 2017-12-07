@@ -9,12 +9,17 @@ import { HomePage } from '../pages/home/home';
 import { ItemDetailPage } from '../pages/item-detail/item-detail';
 import { DataProvider } from '../providers/data/data';
 import { IonicStorageModule } from '@ionic/storage';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
+import { UserProvider } from '../providers/user/user'; 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     AddItemPage,
     ItemDetailPage,
+    LoginPage,
+    RegisterPage,
   ],
   imports: [
     BrowserModule,
@@ -28,12 +33,15 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     AddItemPage,
     ItemDetailPage,
+    RegisterPage,
+    LoginPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
+    UserProvider,
 
   ]
 })
