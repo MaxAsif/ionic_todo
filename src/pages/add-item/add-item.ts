@@ -16,9 +16,20 @@ import { AlertController } from 'ionic-angular';
  export class AddItemPage {
  	title : string;
  	description : string;
-
+ 	time: string;
+ 	titlePage = 'Add Item';
  	constructor(public navCtrl: NavController, public navParams: NavParams, public view : ViewController,
  		public alertCtrl: AlertController) {
+ 		if(navParams.get('title'))
+ 		{
+ 			this.title = navParams.get('title');
+ 			this.description = navParams.get('description');
+ 			this.titlePage = 'Edit Item';
+ 			var att = document.createAttribute("disabled");      
+ 			att.value = "true";
+ 			//document.getElementById("input_title").setAttributeNode(att);
+ 		}
+
  	}
 
  	ionViewDidLoad() {

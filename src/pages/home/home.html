@@ -1,7 +1,18 @@
+<ion-menu [content]="mycontent">
+  <ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let p of pages" >
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav #mycontent></ion-nav>
+
 <ion-header>
-  <ion-navbar color="secondary">
+  <ion-navbar color="dark">
     <ion-title>
-      Todos!
+      Welcome {{name}}
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon></button>
@@ -11,25 +22,30 @@
 
 <ion-content>
   <ion-list>
-    <ion-card *ngFor="let item of items" (click)="viewItem(item)">
+    <ion-card *ngFor="let item of items" >
+      <div (click)="viewItem(item)">
+        <ion-card-header >
+          {{item.title}}
+        </ion-card-header>
 
-      <ion-card-header>
-        {{item.title}}
-      </ion-card-header>
-
-      <ion-card-content>
-        <p>{{item.description}}</p>
-      </ion-card-content>
-
+        <ion-card-content text-wrap no-lines>
+          <p #descp>{{item.description}}</p>
+        </ion-card-content>
+      </div>
       <ion-row>
         <ion-col>
-          <button ion-button icon-left clear small>
+          <button ion-button icon-left clear>
             <ion-icon name="thumbs-up"></ion-icon>
           </button>
         </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear (click)="delete(item)">
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>
+        </ion-col>
         <ion-col end>
-          <button ion-button icon-left clear small>
-            <ion-icon name="text" ></ion-icon>
+          <button ion-button icon-left clear >
+            <ion-icon name="attach" ></ion-icon>
           </button>
         </ion-col>
         

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController }
 import { UserProvider } from '../../providers/user/user';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -10,29 +11,47 @@ import { HomePage } from '../home/home';
  * Ionic pages and navigation.
  */
 
- @IonicPage()
+ 
  @Component({
  	selector: 'page-login',
  	templateUrl: 'login.html',
  })
  export class LoginPage {
+ 	
  	email : any;
  	password : any;
+ 	name : any;
  	authEmail: any;
  	authPassword: any;
+ 	public users = [];
+ 	
  	constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserProvider,
  		public alertCtrl : AlertController, public modalCtrl : ModalController) {
  		
  	}
- 	getAuthdata()
+ 	
+ 	getAuthdata(email)
  	{
  		console.log('Getting user details from storage......');
- 		this.userService.getUser().then((user)=>{
- 			console.log('user after fetching',user.name,user.email,user.password);
- 			if(user)
+ 		this.userService.getUser().then((users)=>{
+ 			
+ 			if(users)
  			{
- 				this.email = user.email;
- 				this.password = user.password;
+ 				console.log('Email being searched for',email);
+ 				for(var i=0; i<users.length; i++)
+ 				{
+ 					console.log("user["+i+"]"+users[i].email+users[i].password);
+
+ 					if(users[i].email == email )
+ 					{
+ 						this.email = users[i].email;
+ 						this.password = users[i].password;
+ 						this.name = users[i].name;
+ 						break;
+ 					}
+ 				}
+ 				
+ 				
  			}
  		}).catch((error)=>{
  			console.log('Cannot get user details',error.message);
@@ -43,7 +62,7 @@ import { HomePage } from '../home/home';
  	login()
  	{	
  		
- 		this.getAuthdata();
+ 		this.getAuthdata(this.authEmail);
  		
  		if(this.authEmail && this.authPassword)
  		{
@@ -57,20 +76,27 @@ import { HomePage } from '../home/home';
  	}
  	ionViewDidLoad() {
  		console.log('ionViewDidLoad LoginPage');	
- 		this.getAuthdata();
+ 		
 
  	}
  	authenticate()
  	{
  		console.log('Email entered',this.authEmail,this.authPassword);
  		console.log('Fetched email',this.email,this.password);
- 		if((this.email == this.authEmail ) && (this.password == this.password))
- 		{
- 			console.log('Authenticated');
- 			this.navCtrl.setRoot(HomePage);
+ 		if(this.email){
+ 			if((this.email == this.authEmail ) && (this.password == this.password))
+ 			{
+ 				console.log('Authenticated');
+ 				this.navCtrl.setRoot(HomePage,{
+ 					name : this.name,
+ 				});
+ 			}
+ 			else{
+ 				console.log('Not authenticated');
+ 			}
  		}
  		else{
- 			console.log('Not authenticated');
+ 			this.showalert('Cannot find you in database :-(');
  		}
  	}
  	showalert(message)
@@ -88,7 +114,8 @@ import { HomePage } from '../home/home';
  		addModal.onDidDismiss((user)=>{
  			if(user)
  			{
- 				this.userService.saveUser(user);
+ 				this.users.push(user);
+ 				this.userService.saveUser(this.users);
  			}
  		});
  		addModal.present();

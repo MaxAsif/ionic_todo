@@ -8,7 +8,6 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
  * Ionic pages and navigation.
  */
 
- @IonicPage()
  @Component({
  	selector: 'page-register',
  	templateUrl: 'register.html',
@@ -19,6 +18,7 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
  	password : string;
  	confirm_password : string;
  	flag : boolean;
+
  	constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, public alertCtrl : AlertController) {
  	}
 
@@ -26,7 +26,7 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
  		console.log('ionViewDidLoad RegisterPage');
  	}
  	ionViewWillLeave() {
- 		console.log("Looks like I'm about to leave :(");
+ 		console.log('Regster page closed');
  		if(this.flag)
  		{
  			let title = 'Congratulations!!';

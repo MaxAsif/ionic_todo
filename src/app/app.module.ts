@@ -9,39 +9,45 @@ import { HomePage } from '../pages/home/home';
 import { ItemDetailPage } from '../pages/item-detail/item-detail';
 import { DataProvider } from '../providers/data/data';
 import { IonicStorageModule } from '@ionic/storage';
+
 import { LoginPage } from '../pages/login/login';
+
 import { RegisterPage } from '../pages/register/register';
 import { UserProvider } from '../providers/user/user'; 
+
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    AddItemPage,
-    ItemDetailPage,
-    LoginPage,
-    RegisterPage,
+  MyApp,
+  HomePage,
+  AddItemPage,
+  ItemDetailPage,
+  LoginPage,
+  RegisterPage
+  
   ],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+  BrowserModule,
+  IonicModule.forRoot(MyApp),
+  IonicStorageModule.forRoot()
 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    AddItemPage,
-    ItemDetailPage,
-    RegisterPage,
-    LoginPage,
+  MyApp,
+  HomePage,
+  AddItemPage,
+  ItemDetailPage,
+  LoginPage,
+  RegisterPage
+  
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider,
-    UserProvider,
+  StatusBar,
+  SplashScreen,
+  {provide: ErrorHandler, useClass: IonicErrorHandler},
+  DataProvider,
+  UserProvider,
+  
 
   ]
 })

@@ -11,19 +11,19 @@ import { Injectable } from '@angular/core';
   export class UserProvider {
 
     constructor(public storage: Storage) {
-      console.log('Hello UserProvider Provider');
+      
     }
     getUser()
     {
 
-      console.log('user credentials fetched');
-      return this.storage.get('user');
+      console.log('users credentials fetched');
+      return this.storage.get('users');
 
     }
-    saveUser(user)
+    saveUser(users)
     {
 
-      this.storage.set('user',user);
+      this.storage.set('users',users);
       
     }
     getAll()

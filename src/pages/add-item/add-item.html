@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="dark">
     <ion-title>
-      Add Item
+      {{titlePage}}
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="close()"><ion-icon name="close"></ion-icon></button>
@@ -14,19 +14,23 @@
 
     <ion-item>
       <ion-label floating>Title</ion-label>
-      <ion-input type="text" [(ngModel)]="title"></ion-input>
+      <ion-input id="input_title" type="text" [(ngModel)]="title"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-textarea type="text" [(ngModel)]="description"></ion-textarea>
+      <ion-textarea rows="4" type="text" [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Período</ion-label>
+      <ion-datetime displayFormat=MM/DD/YYYY" [(ngModel)]="time"></ion-datetime>
     </ion-item>
 
   </ion-list>
   <ion-grid>
     <ion-row>
       <ion-col col-4 >
-        
+
       </ion-col>
       <ion-col col-6>
         <button round middle ion-button color="secondary" (click)="saveItem()">Save</button>
